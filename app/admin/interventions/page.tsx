@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from "react";
 
+import { API_BASE_URL } from "../../config";
+
 type Intervention = {
   id: number;
   id_incident: number;
@@ -20,9 +22,9 @@ type Incident = {
   name: string;
 };
 
-const API_INT = "http://localhost:3001/interventions";
-const API_TECHNICIENS = "http://localhost:3001/techniciens";
-const API_INCIDENTS = "http://localhost:3001/incidents";
+const API_INT = `${API_BASE_URL}/interventions`;
+const API_TECHNICIENS = `${API_BASE_URL}/techniciens`;
+const API_INCIDENTS = `${API_BASE_URL}/incidents`;
 
 export default function InterventionsAdmin() {
   const [interventions, setInterventions] = useState<Intervention[]>([]);
@@ -50,6 +52,7 @@ export default function InterventionsAdmin() {
   };
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     fetchAll();
   }, []);
 

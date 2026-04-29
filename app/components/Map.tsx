@@ -9,6 +9,8 @@ import {
 } from "react-leaflet";
 import L from "leaflet";
 
+import { API_BASE_URL } from "../config";
+
 type Incident = {
   id: number;
   name: string;
@@ -23,7 +25,7 @@ type Intervention = {
 };
 
 // Fix default marker icons (Leaflet bug in Next)
-delete (L.Icon.Default.prototype as any)._getIconUrl;
+delete (L.Icon.Default.prototype as unknown as { _getIconUrl?: unknown })._getIconUrl;
 L.Icon.Default.mergeOptions({
   iconRetinaUrl:
     "https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon-2x.png",
@@ -67,7 +69,7 @@ export default function Map({
   const [interventions, setInterventions] = useState<Intervention[]>([]);
 
   useEffect(() => {
-    fetch("http://localhost:3001/interventions")
+    fetch(`${API_BASE_URL}/interventions`)
       .then((res) => res.json())
       .then(setInterventions);
   }, []);

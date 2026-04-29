@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from "react";
 
+import { API_BASE_URL } from "../../config";
+
 type Incident = {
   id: number;
   name: string;
@@ -9,7 +11,7 @@ type Incident = {
   longitude: number;
 };
 
-const API = "http://localhost:3001/incidents";
+const API = `${API_BASE_URL}/incidents`;
 
 export default function IncidentAdmin() {
   const [incidents, setIncidents] = useState<Incident[]>([]);
@@ -23,6 +25,7 @@ export default function IncidentAdmin() {
   };
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     fetchIncidents();
   }, []);
 

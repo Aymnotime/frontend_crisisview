@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from "react";
 
+import { API_BASE_URL } from "../../config";
+
 type Technicien = {
   id: number;
   name: string;
@@ -10,7 +12,7 @@ type Technicien = {
   phone: string;
 };
 
-const API = "http://localhost:3001/techniciens";
+const API = `${API_BASE_URL}/techniciens`;
 
 export default function TechniciensAdmin() {
   const [techniciens, setTechniciens] = useState<Technicien[]>([]);
@@ -30,6 +32,7 @@ export default function TechniciensAdmin() {
   };
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     fetchTechniciens();
   }, []);
 

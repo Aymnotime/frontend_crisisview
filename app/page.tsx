@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import "leaflet/dist/leaflet.css";
 
+import { API_BASE_URL } from "./config";
+
 type Incident = {
   id: number;
   name: string;
@@ -20,7 +22,7 @@ export default function Home() {
   const [incidents, setIncidents] = useState<Incident[]>([]);
 
   useEffect(() => {
-    fetch("http://localhost:3001/incidents")
+    fetch(`${API_BASE_URL}/incidents`)
       .then((res) => res.json())
       .then(setIncidents);
   }, []);
